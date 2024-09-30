@@ -3,7 +3,7 @@ import BackblazeB2 from 'backblaze-b2';
 // Add CORS middleware
 const allowCors = (fn) => async (req, res) => {
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Change '*' to your specific frontend domain
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
   res.setHeader(
     'Access-Control-Allow-Headers',
@@ -16,7 +16,6 @@ const allowCors = (fn) => async (req, res) => {
   return await fn(req, res);
 };
 
-// Your handler function
 const b2 = new BackblazeB2({
   applicationKeyId: process.env.B2_APPLICATION_KEY_ID,
   applicationKey: process.env.B2_APPLICATION_KEY,
@@ -43,5 +42,4 @@ const handler = async (req, res) => {
   }
 };
 
-// Export your handler wrapped with the CORS middleware
 export default allowCors(handler);
